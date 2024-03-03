@@ -21,6 +21,8 @@ let PlayerMove = () => {
         player.position.x -= 1;
       } else if (event.key === 'd' || event.key === 'D') {
         player.position.x += 1;
+      }else  if (event.key === 'e' || event.key === 'E') {
+       //To do 
       }
     });
   };
