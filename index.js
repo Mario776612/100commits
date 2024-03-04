@@ -7,31 +7,50 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
-const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+let CreateBoxGeometry = (w , h , d) => {
+  return new THREE.BoxGeometry(w,h,d)
+}
 const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-const player = new THREE.Mesh( geometry, material );
+const player = new THREE.Mesh(CreateBoxGeometry(1,1,1), material );
 scene.add( player );
+scene.updateMatrixWorld(true)
+var PlayerPosition = new THREE.Vector3()
+PlayerPosition.setFromMatrixPosition( player.matrixWorld)
 
 player.position.y = -3;
 camera.position.z = 5;
 
+let ActiveBullets = [];
+
+let Shoot = () => {
+  const bullet = new THREE.Mesh( CreateBoxGeometry(0.1,0.1,0.1), material );
+  scene.add( bullet )
+  bullet.position.set(player.position.x,player.position.y+0.7,player.position.z)
+  ActiveBullets.push(bullet)
+}
 let PlayerMove = () => {
     window.addEventListener('keydown', function (event) {
         if (event.key === 'a' || event.key === 'A') {
         player.position.x -= 1;
       } else if (event.key === 'd' || event.key === 'D') {
         player.position.x += 1;
-      }else  if (event.key === 'e' || event.key === 'E') {
-       //To do 
+      } else if (event.key === 'e' || event.key === 'E') {
+        Shoot();
       }
     });
   };
 
 function animate() {
-	requestAnimationFrame( animate );
+  requestAnimationFrame( animate );
+ 
+  for(let i in ActiveBullets){
+    ActiveBullets[i].position.y += 0.01
+    if(ActiveBullets[i].position.y == 0.05){
+      scene.remove( ActiveBullets[i] );
+    }
+  }
 
-
-	renderer.render( scene, camera );
+  renderer.render( scene, camera );
 }
 PlayerMove();
 animate();
