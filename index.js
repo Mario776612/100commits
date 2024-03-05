@@ -44,7 +44,7 @@ function animate() {
   requestAnimationFrame( animate );
  
   for(let i in ActiveBullets){
-    ActiveBullets[i].position.y += 0.01
+    ActiveBullets[i].position.y += 0.2
     if(ActiveBullets[i].position.y == 0.05){
       scene.remove( ActiveBullets[i] );
     }
