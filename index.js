@@ -22,6 +22,10 @@ camera.position.z = 5;
 
 let ActiveBullets = [];
 
+const geometry = new THREE.CylinderGeometry( 5, 5, 20, 32 ); 
+const cylinder = new THREE.Mesh( geometry, material ); 
+scene.add( cylinder );
+
 let Shoot = () => {
   const bullet = new THREE.Mesh( CreateBoxGeometry(0.1,0.1,0.1), material );
   scene.add( bullet )
@@ -49,6 +53,8 @@ function animate() {
       scene.remove( ActiveBullets[i] );
     }
   }
+
+cylinder.rotation.x += 0.1
 
   renderer.render( scene, camera );
 }
