@@ -55,7 +55,7 @@ function animate() {
   }
 
 cylinder.rotation.x += 0.1
-
+//cos
   renderer.render( scene, camera );
 }
 PlayerMove();
