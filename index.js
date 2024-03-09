@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -6,6 +7,9 @@ const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.inner
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
+
+const controls = new OrbitControls( camera, renderer.domElement );
+controls.update();
 
 let CreateBoxGeometry = (w , h , d) => {
   return new THREE.BoxGeometry(w,h,d)
@@ -22,8 +26,11 @@ camera.position.z = 5;
 
 let ActiveBullets = [];
 
-const geometry = new THREE.CylinderGeometry( 5, 5, 20, 32 ); 
-const cylinder = new THREE.Mesh( geometry, material ); 
+const geometry = new THREE.CylinderGeometry( 5, 5, 20, 8 ); 
+const mat = new THREE.MeshBasicMaterial({wireframe: true, color:0x00ff00 })
+const cylinder = new THREE.Mesh( geometry,mat ); 
+cylinder.rotation.x = 80;
+cylinder.position.z = 10;
 scene.add( cylinder );
 
 let Shoot = () => {
@@ -53,9 +60,8 @@ function animate() {
       scene.remove( ActiveBullets[i] );
     }
   }
-
-cylinder.rotation.x += 0.1
-//cos x2
+  cylinder.rotation.y += 0.02;
+  controls.update();
   renderer.render( scene, camera );
 }
 PlayerMove();
