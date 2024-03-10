@@ -42,14 +42,22 @@ let Shoot = () => {
 let PlayerMove = () => {
     window.addEventListener('keydown', function (event) {
         if (event.key === 'a' || event.key === 'A') {
-        player.position.x -= 1;
+        player.position.x -= 0.5;
       } else if (event.key === 'd' || event.key === 'D') {
-        player.position.x += 1;
+        player.position.x += 0.5;
       } else if (event.key === 'e' || event.key === 'E') {
         Shoot();
       }
     });
   };
+var EnemyPosition = new THREE.Vector3()
+let Enemy = () => {
+  const enemy = new THREE.Mesh(CreateBoxGeometry(1,1,1), material );
+  scene.add(enemy)
+  enemy.position.y = 3;
+  EnemyPosition.setFromMatrixPosition( enemy.matrixWorld)
+}
+let flip = true;
 
 function animate() {
   requestAnimationFrame( animate );
@@ -60,9 +68,23 @@ function animate() {
       scene.remove( ActiveBullets[i] );
     }
   }
+  /*
+  if(flip == true){
+    EnemyPosition.position.x += 0.01;
+    if(EnemyPosition.position.x == 1){
+      flip = false;
+    }
+  }else if(flip == false){
+    EnemyPosition.position.x -= 0.01;
+    if(EnemyPosition.position.x == -1){
+      flip = true;
+    }
+  }
+  */
   cylinder.rotation.y += 0.02;
   controls.update();
   renderer.render( scene, camera );
 }
+Enemy();
 PlayerMove();
 animate();
