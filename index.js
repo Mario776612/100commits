@@ -81,6 +81,7 @@ function animate() {
     }
   }
   */
+ //TAk
   cylinder.rotation.y += 0.02;
   controls.update();
   renderer.render( scene, camera );
