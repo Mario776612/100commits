@@ -51,37 +51,34 @@ let PlayerMove = () => {
     });
   };
 var EnemyPosition = new THREE.Vector3()
+const enemy = new THREE.Mesh(CreateBoxGeometry(1,1,1), material );
 let Enemy = () => {
-  const enemy = new THREE.Mesh(CreateBoxGeometry(1,1,1), material );
   scene.add(enemy)
   enemy.position.y = 3;
-  EnemyPosition.setFromMatrixPosition( enemy.matrixWorld)
+ //EnemyPosition.setFromMatrixPosition( enemy.matrixWorld)
 }
 let flip = true;
 
 function animate() {
   requestAnimationFrame( animate );
- 
   for(let i in ActiveBullets){
     ActiveBullets[i].position.y += 0.2
-    if(ActiveBullets[i].position.y == 0.05){
+    if(ActiveBullets[i].position.y >= 4){
       scene.remove( ActiveBullets[i] );
     }
   }
-  /*
   if(flip == true){
-    EnemyPosition.position.x += 0.01;
-    if(EnemyPosition.position.x == 1){
+    enemy.position.x += 0.01;
+    if(enemy.position.x <= 0.1){
       flip = false;
     }
   }else if(flip == false){
-    EnemyPosition.position.x -= 0.01;
-    if(EnemyPosition.position.x == -1){
+    enemy.position.x -= 0.01;
+    if(enemy.position.x >= -0.1){
       flip = true;
     }
   }
-  */
- //a
+ 
   cylinder.rotation.y += 0.02;
   controls.update();
   renderer.render( scene, camera );
