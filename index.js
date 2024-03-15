@@ -78,7 +78,7 @@ function animate() {
       flip = true;
     }
   }
- 
+ //a
   cylinder.rotation.y += 0.02;
   controls.update();
   renderer.render( scene, camera );
