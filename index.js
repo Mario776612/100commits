@@ -50,13 +50,10 @@ let PlayerMove = () => {
       }
     });
   };
-var EnemyPosition = new THREE.Vector3()
+var EnemyPositionCap = new THREE.Vector3(4,3,0)
 const enemy = new THREE.Mesh(CreateBoxGeometry(1,1,1), material );
-let Enemy = () => {
-  scene.add(enemy)
-  enemy.position.y = 3;
- //EnemyPosition.setFromMatrixPosition( enemy.matrixWorld)
-}
+enemy.position.y = 3;
+scene.add(enemy)
 let flip = true;
 
 function animate() {
@@ -68,21 +65,19 @@ function animate() {
     }
   }
   if(flip == true){
-    enemy.position.x += 0.01;
-    if(enemy.position.x <= 0.1){
+    enemy.position.x += 0.02;
+    if (enemy.position.x > EnemyPositionCap.x) {
       flip = false;
-    }
+  }
   }else if(flip == false){
-    enemy.position.x -= 0.01;
-    if(enemy.position.x >= -0.1){
+    enemy.position.x -= 0.02;
+    if(enemy.position.x < -EnemyPositionCap.x){
       flip = true;
     }
   }
- //b
   cylinder.rotation.y += 0.02;
   controls.update();
   renderer.render( scene, camera );
 }
-Enemy();
 PlayerMove();
 animate();
