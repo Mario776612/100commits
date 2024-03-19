@@ -66,7 +66,7 @@ scene.add(enemy)
 //Collision
 let checkCollision = () => {
 if(PlayerBox.intersectsBox(enemyBox)){
-  console.log(true)
+   
 }
 }
 
@@ -75,7 +75,7 @@ function animate() {
   requestAnimationFrame( animate );
   enemyBox.copy(enemy.geometry.boundingBox).applyMatrix4(enemy.matrixWorld);
   PlayerBox.copy(player.geometry.boundingBox).applyMatrix4(player.matrixWorld);
-
+  checkCollision();
 
 
 
