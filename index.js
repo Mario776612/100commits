@@ -70,7 +70,7 @@ if(PlayerBox.intersectsBox(enemyBox)){
 }
 }
 
-//let flip = true;
+//let flip = true; a
 function animate() {
   requestAnimationFrame( animate );
   enemyBox.copy(enemy.geometry.boundingBox).applyMatrix4(enemy.matrixWorld);
