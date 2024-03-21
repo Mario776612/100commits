@@ -86,7 +86,7 @@ function animate() {
       scene.remove( ActiveBullets[i] );
     }
   }
-  /*
+
   if(flip == true){
     enemy.position.x += 0.02;
     if (enemy.position.x > EnemyPositionCap.x) {
@@ -98,7 +98,6 @@ function animate() {
       flip = true;
     }
   }
-  */
   cylinder.rotation.y += 0.02;
   controls.update();
   renderer.render( scene, camera );
