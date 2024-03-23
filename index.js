@@ -79,7 +79,7 @@ function animate() {
 
 
 
-// Clean this shit up
+// Clean this shit up a
   for(let i in ActiveBullets){
     ActiveBullets[i].position.y += 0.2
     if(ActiveBullets[i].position.y >= 4){
